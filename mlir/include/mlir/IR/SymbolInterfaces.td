@@ -178,10 +178,10 @@ def Symbol : OpInterface<"SymbolOpInterface"> {
   let extraClassDeclaration = [{
     /// Custom classof that handles the case where the symbol is optional.
     static bool classof(Operation *op) {
-      auto *concept = getInterfaceFor(op);
-      if (!concept)
+      auto *op_interface = getInterfaceFor(op);
+      if (!op_interface)
         return false;
-      return !concept->isOptionalSymbol(op) ||
+      return !op_interface->isOptionalSymbol(op) ||
              op->getAttr(::mlir::SymbolTable::getSymbolAttrName());
     }
   }];
